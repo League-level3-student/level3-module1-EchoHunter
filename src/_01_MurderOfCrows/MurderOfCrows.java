@@ -12,14 +12,30 @@ public class MurderOfCrows {
         murderOfCrows.initializeCrows();
         murderOfCrows.findTheDiamond();
     }
-
+int kills =0;
+boolean found = false;
     private void findTheDiamond() {
+    	
         // 1. One of the Crows has eaten the diamond. You need to search
         //    through the stomach of each Crow, then print the name of the
         //    guilty Crow.
-
+for (int i = 0; i < theMurder.size(); i++) {
+	kills++;
+	ArrayList <String> contents = theMurder.get(i).getStomachContents();
+	for (String c:contents) {
+		if(c.equals("diamond")) {
+			System.out.println(theMurder.get(i).getName());
+			found = true;
+			break;
+		}
+	
+	}
+	if(found) {
+		break;
+	}
+}
         // 2. How many innocent crows had to die before the diamond was found?
-
+		System.out.println(kills + " crows have died");
     }
 
     private void initializeCrows() {

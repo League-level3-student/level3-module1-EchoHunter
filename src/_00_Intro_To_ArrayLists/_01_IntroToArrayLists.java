@@ -27,12 +27,12 @@ for (int i = 0; i < names.size(); i+=2) {
 	System.out.println(names.get(i));
 }
         // 6. Print all the Strings in reverse order.
-for (int i = names.size(); i  < 0 i--) {
+for (int i = names.size(); i  < 0; i--) {
 	System.out.println(names.get(i));
 }
         // 7. Print only the Strings that have the letter 'e' in them.
         for (String n:names) {
-			if(n.contains('e')) {
+			if(n.contains("e")) {
 				System.out.println(n);
 			}
 		}
