@@ -15,7 +15,18 @@ public class LongChipCompetition {
 
     public static void main(String[] args) {
         LongChipCompetition lcc = new LongChipCompetition();
-
+ lcc.initializeBeatles();
+ double longestChipLenth = 0;
+ String beatleWithLongChip = "";
+ for(Beatle g:lcc.getTheBand()) {
+	for(Chip c:g.getChips()) {
+		if(c.getLength()>longestChipLenth) {
+			longestChipLenth = c.getLength();
+			beatleWithLongChip = g.getName();
+		}
+	}
+}
+ System.out.println("The longest chip is " + longestChipLenth + " and it belongs to "+ beatleWithLongChip);
     }
 
     private void initializeBeatles() {
