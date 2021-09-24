@@ -48,45 +48,51 @@ public class GameBoard extends JFrame implements ActionListener {
         // 3. Create TOTAL_CARDS number of objects each with a value of 1.
         //    Also, add action listeners to each Card object and then add each
         //    of the Card objects to the ArrayList of Cards.
-        for (int i = 0; i < 5; i++) {
-		cards.add(new Card (2));	
-		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (3));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (4));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (5));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (6));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (7));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (8));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (9));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (10));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (11));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (12));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (13));	
-    		}
-        for (int i = 0; i < 5; i++) {
-    		cards.add(new Card (1));	
-    		}
+       int cardsSoFar = 0;
+        for (int i = 0; i < TOTAL_CARDS; i++) {
+    	  if((cardsSoFar >= 0)&&(cardsSoFar<= 3)) {
+    		  cards.add(new Card (1));
+    	  }
+    	  if((cardsSoFar >=4)&&(cardsSoFar <= 7)) {
+    		  cards.add(new Card (2));
+    	  }
+    	  if((cardsSoFar >=8)&&(cardsSoFar <= 11)) {
+    		  cards.add(new Card (3));
+    	  }
+    	  if((cardsSoFar >=12)&&(cardsSoFar <= 15)) {
+    		  cards.add(new Card (4));
+    	  }
+    	  if((cardsSoFar >=16)&&(cardsSoFar <= 19)) {
+    		  cards.add(new Card (5));
+    	  }
+    	  if((cardsSoFar >=20)&&(cardsSoFar <= 23)) {
+    		  cards.add(new Card (6));
+    	  }
+    	  if((cardsSoFar >=24)&&(cardsSoFar <= 27)) {
+    		  cards.add(new Card (7));
+    	  }
+    	  if((cardsSoFar >=28)&&(cardsSoFar <= 31)) {
+    		  cards.add(new Card (8));
+    	  }
+    	  
+    	  if((cardsSoFar >=32)&&(cardsSoFar <= 35)) {
+    		  cards.add(new Card (9));
+    	  }
+    	  if((cardsSoFar >=36)&&(cardsSoFar <= 39)) {
+    		  cards.add(new Card (10));
+    	  }
+    	  if((cardsSoFar >=40)&&(cardsSoFar <= 43)) {
+    		  cards.add(new Card (11));
+    	  }
+    	  if((cardsSoFar >=44)&&(cardsSoFar <= 47)) {
+    		  cards.add(new Card (12));
+    	  }
+    	  if((cardsSoFar >=48)&&(cardsSoFar <= 51)) {
+    		  cards.add(new Card (13));
+    	  }
+    	   cards.get(i).addActionListener(this);
+    	   cardsSoFar++;
+        } 
         // 4. Use Collections.shuffle() method to randomize the order of
         //    the cards in the ArrayList
         Collections.shuffle(cards);
