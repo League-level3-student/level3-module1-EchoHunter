@@ -1,12 +1,15 @@
 package _05_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class _02_LogSearch {
+public class _02_LogSearch implements ActionListener {
     /* 
      * Crate a HashMap of Integers for the keys and Strings for the values.
      * Create a GUI with three buttons. 
@@ -45,8 +48,51 @@ JButton addEntry;
 JButton search;
 JButton viewList;
 JButton remove;
-public static void main(String[] args) {
-	
+public void guiSetup() {
+	frame = new JFrame();
+	panel = new JPanel();
+	addEntry = new JButton();
+	search = new JButton();
+	viewList = new JButton();
+	remove = new JButton();
+	addEntry.addActionListener(this);
+	search.addActionListener(this);
+	viewList.addActionListener(this);
+	remove.addActionListener(this);
+	panel.add(addEntry);
+	panel.add(search);
+	panel.add(viewList);
+	panel.add(remove);
+	addEntry.setText("Add Entry");
+	search.setText("Search");
+	viewList.setText("View Log");
+	remove.setText("Remove Entry");
+	frame.add(panel);
+	frame.setVisible(true);
 }
-
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	if(e.getSource() == addEntry) {
+	String entry =	JOptionPane.showInputDialog("Provide a new Entry to the Log");
+	log.put(log.size(),entry);
+	}
+	if(e.getSource() == search) {
+	String num = JOptionPane.showInputDialog("Enter an ID number");
+	int id = Integer.parseInt(num);
+	JOptionPane.showMessageDialog(null, "The Entry for ID "+id+ " is as follows: "+ log.get(id));
+	}
+	if(e.getSource() == viewList) {
+	String logList = "";
+	for (int i = 0; i < log.size(); i++) {
+		logList += "ID: "+i +"	Name: " + log.get(i)+ "\n";
+	}
+	JOptionPane.showMessageDialog(null, logList);
+	}
+	if(e.getSource() == remove) {
+	String toRemove= JOptionPane.showInputDialog("Input an ID you wish to remove");
+	int removeID = Integer.parseInt(toRemove);
+	log.remove(removeID);
+	}
+}
 }
