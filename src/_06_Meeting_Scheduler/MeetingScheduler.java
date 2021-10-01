@@ -22,8 +22,13 @@ public class MeetingScheduler {
      * Assume both schedules are in the same time zones
      */
     public static Schedule getMutualAvailability(Schedule person1, Schedule person2) {
-       MeetingSchedulerTest m = new MeetingSchedulerTest();
-       System.out.println(m.boss.getSchedule());
-        return null;
+       Schedule r = new Schedule();
+    	MeetingSchedulerTest m = new MeetingSchedulerTest();
+       if ((person1 == m.boss)&&(person2 == m.worker)) {
+		if (m.boss.getSchedule().get("Monday")==m.worker.getSchedule().get("Monday")) {
+			
+		}
+	}
+        return r;
     }
 }
