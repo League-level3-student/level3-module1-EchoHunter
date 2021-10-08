@@ -24,11 +24,23 @@ public class MeetingScheduler {
     public static Schedule getMutualAvailability(Schedule person1, Schedule person2) {
        Schedule r = new Schedule();
     	MeetingSchedulerTest m = new MeetingSchedulerTest();
-       if ((person1 == m.boss)&&(person2 == m.worker)) {
-		if (m.boss.getSchedule().get("Monday")==m.worker.getSchedule().get("Monday")) {
-			
+     String[] day = new String[7];
+     day[0] = "Monday";
+     day[1] = "Tuesday";
+     day[2] = "Wednesday";
+     day[3] = "Thursday";
+     day[4] = "Friday";
+     day[5] = "Saturday";
+     day[6] = "Sunday";
+     for(String d:day) {
+    	for (int i:person1.getSchedule().get(d)) {
+		for(int k:person2.getSchedule().get(d)) {
+			if(i == k) {
+				r.addAvailability(d, i);
+			}
 		}
 	}
+     }
         return r;
     }
 }
