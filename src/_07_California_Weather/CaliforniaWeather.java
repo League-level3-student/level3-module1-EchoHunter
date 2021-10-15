@@ -52,7 +52,10 @@ public class CaliforniaWeather implements ActionListener {
         panel.add(getConditionList);
         panel.add(getMaxAndMinTemp);
         frame.add(panel);
-        frame.setSize(500,250);
+        frame.setSize(350,100);
+        getCityWeather.setText("Check City Weather");
+        getConditionList.setText("Search by Condition");
+        getMaxAndMinTemp.setText("Search by Temperature");
         frame.setVisible(true);
         // All city keys have the first letter capitalized of each word
         
@@ -73,14 +76,45 @@ public class CaliforniaWeather implements ActionListener {
 	        }
 	}
 		if(e.getSource() == getConditionList) {
+			String print = "";
+			int lineNum = 0;
 			String condition = JOptionPane.showInputDialog("What Conditions are you looking for? (the first letter of every word should be capitalized)");
 			for (String w: weatherData.keySet()) {
-				
+				if (weatherData.get(w).weatherSummary .equals(condition)) {
+					if(lineNum <= 5) {
+					print += w + ", ";
+					lineNum++;
+					}
+					if(lineNum > 5) {
+						print+= w+"\n";
+						lineNum = 0;
+					}
+				}
 			}
+			JOptionPane.showMessageDialog(null, print);
 			
 			}
 		if(e.getSource() == getMaxAndMinTemp) {
-			
+			int lineNum = 0;
+			Double [] maxAndMinTemps = new Double [2];
+			String print = "";
+			String temp1 = JOptionPane.showInputDialog("Enter the Maximum temperature you are looking for");
+			String temp2 = JOptionPane.showInputDialog("Enter the Minimum temperature you are looking for");
+		maxAndMinTemps[0] = Double.parseDouble(temp1);
+		maxAndMinTemps[1] = Double.parseDouble(temp2);
+		for (String w: weatherData.keySet()) {
+			if ((weatherData.get(w).temperatureF > maxAndMinTemps[1])&&(weatherData.get(w).temperatureF < maxAndMinTemps[0])) {
+				if(lineNum <= 5) {
+					print += w + ", ";
+					lineNum++;
+					}
+					if(lineNum > 5) {
+						print+= w+"\n";
+						lineNum = 0;
+					}
+			}
+		}
+		JOptionPane.showMessageDialog(null, print);
 		}
 	}
 }
