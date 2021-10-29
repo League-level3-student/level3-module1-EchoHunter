@@ -44,6 +44,7 @@ public class WorldClocks implements ActionListener {
     Timer timer;
     TimeZone timeZone;
     HashMap <Integer, JTextArea> timeZoneBoxes;
+    HashMap <Integer, String> cities;
     int timeZoneNum;
     JFrame frame;
     JPanel panel;
@@ -55,6 +56,8 @@ public class WorldClocks implements ActionListener {
     String timeStr;
     
     public WorldClocks() {
+    	cities = new HashMap<Integer,String>();
+    	timeZoneBoxes = new HashMap<Integer, JTextArea>();
     	timeZoneNum = 0;
     	clockUtil = new ClockUtilities();
 
@@ -95,34 +98,44 @@ public class WorldClocks implements ActionListener {
     public void actionPerformed(ActionEvent arg0) {
     	if(arg0.getSource() == timer) {
     	for (int j = 0; j < timeZoneBoxes.size(); j++) {
-			
-		
+    		timeZone = clockUtil.getTimeZoneFromCityName(cities.get(j));
+    		
+    		Calendar calendar = Calendar.getInstance(timeZone);
     		Calendar c = Calendar.getInstance(timeZone);
         String militaryTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
         String twelveHourTime = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "]";
+        String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        String dayOfWeek = calendar.getDisplayName( Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+        dateStr = dayOfWeek + " " + month + " " + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.YEAR);
         timeStr = militaryTime + twelveHourTime;
         
-        System.out.println(timeStr);
-        timeZoneBoxes.get(j).setText(city + "\n" + dateStr + "\n" + timeStr);
+        
+        timeZoneBoxes.get(j).setText(cities.get(j) + "\n" + dateStr + "\n" + timeStr);
         frame.pack();
     	}
        }
        else if(arg0.getSource() == addNewClock) {
-    	 timeZoneNum++;
+    	   
     	 JTextArea newText = new JTextArea();
-    	   city = JOptionPane.showInputDialog("Enter new Clock in Country,City  \nEx. 'Chicago, US' ");
-    	 timeZone = clockUtil.getTimeZoneFromCityName(city);      
-         Calendar calendar = Calendar.getInstance(timeZone);
-       	 String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+    	 city = JOptionPane.showInputDialog("Add a city you would like to see the timezone for \n Ex: Chicago,US or Torino, IT");
+    	 cities.put(timeZoneNum, city);
+    	 timeZone = clockUtil.getTimeZoneFromCityName(city);
+    	 Calendar c = Calendar.getInstance(timeZone);
+    	 Calendar calendar = Calendar.getInstance(timeZone);
+         String militaryTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+         String twelveHourTime = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "]";
+         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
          String dayOfWeek = calendar.getDisplayName( Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-       dateStr = dayOfWeek + " " + month + " " + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.YEAR);
-       
-       newText.setText(city + "\n" + dateStr + "\n" + timeStr);
-       timeZoneBoxes.put(timeZoneNum, newText);
-       panel.add(timeZoneBoxes.get(timeZoneNum));
-       
-       frame.pack();
-       
+         dateStr = dayOfWeek + " " + month + " " + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.YEAR);
+         timeStr = militaryTime + twelveHourTime;
+    	 newText.setText(city + "\n" + dateStr + "\n" + timeStr);
+    	 
+    	
+    	 timeZoneBoxes.put(timeZoneNum, newText);
+    	 panel.add(timeZoneBoxes.get(timeZoneNum));
+    	 frame.pack();
+       timeZoneNum++;
        }
     	
     }
